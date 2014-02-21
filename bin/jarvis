@@ -1,0 +1,78 @@
+#!/usr/bin/env nodr
+
+var Actions = ['server', 'build'];
+
+
+main();
+
+
+function main() {
+	var argv = process.argv,
+		command = argv[2];
+
+	if (!command) {
+		return useage();
+	}
+
+	var action = null;
+	try {
+		action = require('../lib/' + command);
+	} catch (e) {
+		p('找不到命令: ' + command);
+		return;
+	}
+
+	var args = parseArgs();
+	actionObj.run.apply(actionObj, args);
+}
+
+
+function useage() {
+	p('useage: jarvis<command> [<args>]')
+	Actions.forEach(function(command) {
+		var action = require('../lib/' + command);
+		if (action.desc) {
+			p(slen('', 3) + slen(command, 20) + action.desc());
+		}
+	});
+}
+
+
+function parseArgs() {
+	var params = [],
+		options = {}
+		key = null;
+
+	for (var i = 3, c = argv.length; i < c; i++) {
+		var arg = argv[i];
+		if (arg.indexOf('-') === 0) {
+			key = arg.replace(/^-+/, '');
+			options[key] = true;
+		} else {
+			if (key) {
+				options[key] = arg;
+				key = null;
+			} else {
+				params.push(arg);
+			}
+		}
+	}
+
+	return [params[0], options];
+}
+
+
+function slen(str, len) {
+	len = len - str.length;
+	if (len > 0) {
+		var s = [];
+		s.length = len + 1;
+		str += s.join(' ');
+	}
+	return str;
+}
+
+
+function p(msg, len) {
+	console.log(msg);
+}
