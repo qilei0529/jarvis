@@ -1,45 +1,58 @@
 #!/usr/bin/env nodr
 
-var Actions = ['server', 'build'];
-
 
 main();
 
 
 function main() {
 	var argv = process.argv,
-		command = argv[2];
+		name = argv[2];
 
-	if (!command) {
+	if (!name) {
 		return useage();
 	}
 
-	var action = null;
+	var command = null;
 	try {
-		action = require('../lib/' + command);
+		command = require('../lib/command/' + name);
 	} catch (e) {
-		p('找不到命令: ' + command);
+		p('找不到命令: ' + name);
 		return;
 	}
-
+	
 	var args = parseArgs();
-	actionObj.run.apply(actionObj, args);
+	command.run.apply(command, args);
 }
 
 
 function useage() {
-	p('useage: jarvis<command> [<args>]')
-	Actions.forEach(function(command) {
-		var action = require('../lib/' + command);
-		if (action.desc) {
-			p(slen('', 3) + slen(command, 20) + action.desc());
+	p('useage: jarvis <command> [<args>]');
+	var commands = getCommands();
+	commands.forEach(function(name) {
+		var command = require('../lib/command/' + name);
+		if (command.desc) {
+			p(slen('', 3) + slen(name, 20) + command.desc());
 		}
+	});
+}
+
+function getCommands() {
+	var Path = require('path'),
+		fs = require('fs'),
+		dir = Path.normalize(Path.join(__dirname, '../lib/command')),
+		files = fs.readdirSync(dir);
+
+	return files.filter(function(file) {
+		return /\.js$/.test(file);
+	}).map(function(file) {
+		return file.replace(/\.js$/, '');
 	});
 }
 
 
 function parseArgs() {
-	var params = [],
+	var argv = process.argv,
+		params = [],
 		options = {}
 		key = null;
 
