@@ -1,0 +1,11 @@
+module.exports = {
+	port: 8888,
+	root: '/Users/bencode/webroot',
+	logger: 'dev',
+
+	hosts: {
+		'www.jarvis.com': {
+			root: '/Users/bencode/webroot/jarvis'
+		}
+	}
+}
