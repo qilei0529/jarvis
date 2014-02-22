@@ -14,13 +14,20 @@ jarvis 是钢铁侠Iron man里 的Tony制造的那台超级电脑的名字。它
 ###基本功能
 
 1. 本地重构环境。支持html模板，less等。
+2. 支持artTemplate html 模板语言。
+3. 支持stylus css 模板语言。
 
 
 ###开发中的功能
 
 1. 支持文件编译。支持html合并输出，less合并输出及压缩。
-2. 支持Host代理环境。支持 域名代理，文件夹代理，单文件代理。
 
+
+###策划中的功能
+
+1. 支持Host代理环境。支持 域名代理，文件夹代理，单文件代理。
+2. 支持编译使css中的图片自动合并
+3. 支持url路由
 
 ====
 
@@ -85,12 +92,30 @@ hosts 配置，指定域名指向到特定目录。
 
 	hosts: {
 		'www.jarvis.com': {
-			root: '/Users/bencode/webroot/jarvis'
+			root: '/Users/qilei/webroot/jarvis'
 		}
 	}
 
 
 ###特性说明
 
+以下是针对特性的简要说明： 详细可以翻 template 目录中的代码
+
+**html 支持**
+
+访问   
+	
+	localhost:8888/xx../xx.html
+
+这个html文件支持artTemplate 语法。  详细语法参考 [artTemplate](https://github.com/aui/artTemplate "aui-artTemplate") 
+
+
+**css 语法支持**
+
+访问
+
+	localhost:8888/xx../xx.css
+
+当前目录如果没有xx.css 会调用 同名 xx.less, xx.stylus模板支持。 
 
 
