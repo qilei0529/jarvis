@@ -3,6 +3,12 @@ module.exports = {
 	root: '/Users/bencode/webroot',
 	logger: 'dev',
 
+	art: {
+		paths: [
+			'/Users/bencode/webroot/jarvis-art'
+		]
+	},
+
 	hosts: {
 		'www.jarvis.com': {
 			root: '/Users/bencode/webroot/jarvis'
