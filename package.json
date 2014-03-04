@@ -14,6 +14,7 @@
   "devDependencies": {
     "less": "~1.6.3",
     "connect": "~2.13.0",
+    "stylus": "~0.42.3",
     "art-template": "~2.0.3-rc5"
   }
 }

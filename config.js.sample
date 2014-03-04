@@ -1,17 +1,17 @@
 module.exports = {
 	port: 8888,
-	root: '/Users/bencode/webroot',
+	root: '/Users/##usrname##/Code/jarvis',
 	logger: 'dev',
 
 	art: {
 		paths: [
-			'/Users/bencode/webroot/jarvis-art'
+			'/Users/##usrname##/Code/jarvis/demo/element'
 		]
 	},
 
 	hosts: {
-		'www.jarvis.com': {
-			root: '/Users/bencode/webroot/jarvis'
+		'jarvis.org': {
+			root: '/Users/##usrname##/Code/'
 		}
 	}
 }
